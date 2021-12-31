@@ -28,26 +28,26 @@ def player()
         exit
     end
 
-    puts "Type in your answer: (hit|stay)"
+    puts "Type in your answer: (hit|stay) CARD 3"
     choice = gets.chomp.downcase
     
     #Third card to be drawn.
     if choice.include? 'hit'
         answer += hit()
         puts "#{answer}"
+        if answer == 21
+            puts "You have #{answer}! You Win!"
+            exit
+        end
+        if answer > 21
+            puts "#{answer} Bust!"
+            exit
+        end
     elsif choice.include? 'stay'
         return answer
     end
     
-    if answer == 21
-        puts "You have #{answer}! You Win!"
-    end
-    if answer > 21
-        puts "#{answer} Bust!"
-        exit
-    end
-
-    puts "(hit|stay)"
+    puts "(hit|stay) CARD 4"
     choice2 = gets.chomp.downcase
     
     #4th card to be drawn. 2nd Hit.
@@ -64,28 +64,36 @@ def player()
             puts "#{answer}"
             puts "(hit|stay)"
             choice = gets.chomp.downcase
-            if choice.include? 'hit'
-                answer += hit()
-                if answer > 21
-                    puts "#{answer} Bust!"
-                    exit
-                elsif answer == 21
-                    puts "#{answer}! You Win!"
-                else
-                    puts "#{answer}"
-                    return answer
-                end
-            end
             
         end
-    end 
-    
+        if choice.include? 'hit'
+            answer += hit()
+            if answer > 21
+                puts "#{answer} Bust!"
+                exit
+            elsif answer == 21
+                puts "#{answer}! You Win!"
+                exit
+            else
+                puts "#{answer}"
+                return answer
+            end
+        else 
+            choice.include? 'stay' 
+            puts "#{answer}"
+            return answer        
+        end
+        
+            
+    end
+
+
     if choice2.include? 'stay'
         puts "#{answer}"
         return answer
     end
 
-    puts "(hit|stay)"
+    puts "(hit|stay) CARD 5"
     choice3 = gets.chomp.downcase
 
     #5th and final card to be drawn
