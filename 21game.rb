@@ -8,8 +8,6 @@ def dealer_first()
     return dealer1
 end
 
-
-
 # This is a method that is called to draw a card.
 def hit()
     card_1 = rand(1..10) 
@@ -66,6 +64,7 @@ def player()
             choice = gets.chomp.downcase
             
         end
+
         if choice.include? 'hit'
             answer += hit()
             if answer > 21
@@ -76,17 +75,13 @@ def player()
                 exit
             else
                 puts "#{answer}"
-                return answer
             end
         else 
             choice.include? 'stay' 
             puts "#{answer}"
             return answer        
-        end
-        
-            
+        end       
     end
-
 
     if choice2.include? 'stay'
         puts "#{answer}"
@@ -101,9 +96,11 @@ def player()
         answer += hit()
         puts "#{answer}"
         if answer <= 21
-            puts "5 card draw! You Win!"
-        else
-            return answer
+            puts "#{answer}5 Card Charlie! You Win!"
+        end
+        
+        if answer > 21
+            puts "#{answer} BUST! You Lose!"
         end
     end        
 end      
@@ -112,8 +109,6 @@ def gameplay(dealer, player)
     puts " The Dealer has: #{dealer} | You have: #{player}"
     dealer2 = rand(1..10)
     answer = dealer2 + dealer
-
-    
 
     until answer == 21 || answer > player do
         answer += hit()    
@@ -135,9 +130,6 @@ def gameplay(dealer, player)
         puts "The dealer has #{answer} | You have #{player}. You Win!"
         exit
     end
-
-    
-    
-
 end
+
 gameplay(dealer_first(), player())
